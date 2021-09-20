@@ -30,7 +30,8 @@ def main():
 
 def refill(vector, iter):
     j = 0
-    vector = [0 for _ in range(len(vector))]
+    for i in range(len(vector)):
+        vector[i] = 0
     while True:
         vector[j] = iter % 2
         iter //= 2
@@ -43,12 +44,12 @@ def state(vector, attractors):
     print(f"\nvector {vector}")
     string = vectorToStr(vector)
     temp = [string]
-    for m in range(2 ** N):
-        for k in range(N):
-            pos = find(matrix[k])
-            for j in range(N):
-                vector[k] = int(eval(logicalOperations[j].format(vector[pos[0]], vector[pos[1]])))
-        print(f"State {m + 1} {vector}")
+    for i in range(2 ** N):
+        for j in range(N):
+            pos = find(matrix[j])
+            for k in range(N):
+                vector[j] = int(eval(logicalOperations[k].format(vector[pos[0]], vector[pos[1]])))
+        print(f"State {i + 1} {vector}")
         string = vectorToStr(vector)
         if string in temp:
             attractors.append(temp)
@@ -71,10 +72,8 @@ def uniqueAttractor(attractors):
         sum = ""
         for j in range(N):
             tempSum = 0
-            temp = 0
             for k in range(len(attractors[i])):
-                temp += int(attractors[i][k][j])
-            tempSum += temp
+                tempSum += int(attractors[i][k][j])
             sum += str(tempSum)
         uniqueAttractors[sum] = i
     j = 1
