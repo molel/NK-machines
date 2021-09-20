@@ -30,8 +30,7 @@ def main():
 
 def refill(vector, iter):
     j = 0
-    for i in range(len(vector)):
-        vector[i] = 0
+    vector = [0 for _ in range(len(vector))]
     while True:
         vector[j] = iter % 2
         iter //= 2
@@ -40,8 +39,8 @@ def refill(vector, iter):
         j += 1
 
 
-def state(vector, attractor):
-    print(f"vector {vector}")
+def state(vector, attractors):
+    print(f"\nvector {vector}")
     string = vectorToStr(vector)
     temp = [string]
     for m in range(2 ** N):
@@ -52,7 +51,7 @@ def state(vector, attractor):
         print(f"State {m + 1} {vector}")
         string = vectorToStr(vector)
         if string in temp:
-            attractor.append(temp)
+            attractors.append(temp)
             return
         else:
             temp.append(string)
@@ -81,7 +80,7 @@ def uniqueAttractor(attractors):
     j = 1
     uniqueAttractors = collections.OrderedDict(sorted(uniqueAttractors.items()))
     for index, el in uniqueAttractors.items():
-        print(f"atr {j}")
+        print(f"\natr {j}")
         for i in attractors[el]:
             print(i)
         j += 1
